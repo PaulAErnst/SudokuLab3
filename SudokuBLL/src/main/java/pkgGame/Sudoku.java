@@ -23,6 +23,7 @@ public class Sudoku extends LatinSquare {
 	 * @since Lab #2
 	 */
 	private int iSize;
+	private int what = 1;
 
 	/**
 	 * iSqrtSize - SquareRoot of the iSize. If the iSize is 9, iSqrtSize will be
