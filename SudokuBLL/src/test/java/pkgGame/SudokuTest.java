@@ -230,6 +230,7 @@ public class SudokuTest {
 		}
 		
 	}	*/
+	
 
 	@Test
 	public void TestRegionNbr()
@@ -258,4 +259,114 @@ public class SudokuTest {
 		assertTrue(Arrays.equals(Region5, s1.getRegion(5)));
 		
 	}
+	
+	//--------------------------------------Lab 3 Material-----------------------------------
+	
+	@Test
+	public void getRegionNbrTest1()
+	{
+		Sudoku s1= null;
+		
+		int[][] puzzle = { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		try {
+			 s1 = new Sudoku(puzzle);
+		} catch (Exception e) {
+			fail("Bad Sudoku");
+		}
+		
+		assertTrue(s1.getRegionNbr(0,0) == 0);
+		
+	}
+	
+	@Test
+	public void getRegionNbrTest2()
+	{
+		Sudoku s1= null;
+		
+		int[][] puzzle = { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		try {
+			 s1 = new Sudoku(puzzle);
+		} catch (Exception e) {
+			fail("Bad Sudoku");
+		}
+		
+		assertTrue(s1.getRegionNbr(5,3) == 4);
+		
+	}
+	
+	@Test
+	public void getRegionNbrTest3()
+	{
+		Sudoku s1= null;
+		
+		int[][] puzzle = { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		try {
+			 s1 = new Sudoku(puzzle);
+		} catch (Exception e) {
+			fail("Bad Sudoku");
+		}
+		
+		assertTrue(s1.getRegionNbr(7,6) == 8);
+		
+	}
+	
+	@Test
+	public void PrintPuzzleTest() {
+
+		
+			Sudoku s1= null;
+			
+			int[][] puzzle = { 
+					{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+					{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+					{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+					{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+					{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+					{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+					{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+					{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+					{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+			
+			try {
+				 s1 = new Sudoku(puzzle);
+			} catch (Exception e) {
+				fail("Bad Sudoku");
+			}
+			s1.printPuzzle();
+			assertTrue(true);
+		
+			}
+		
+	
+	
 }

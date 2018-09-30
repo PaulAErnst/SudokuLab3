@@ -1,5 +1,13 @@
 package pkgGame;
 
+
+//Below is used for Lab 3--------
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+//Above is used for Lab 3--------
+
+
 import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
 import pkgHelper.PuzzleViolation;
@@ -271,4 +279,59 @@ public class Sudoku extends LatinSquare {
 		
 		return true;
 	}
+	//--------------------------------------Lab 3 Material-----------------------------------
+		//Prints puzzle to the console, in format:
+		//Space between columns, line break after row.
+		public void printPuzzle() {
+			for (int i = 0; i < this.iSize; i++) {
+				for (int j = 0; j < this.iSize; j++) {
+					System.out.print(super.getLatinSquare()[i][j] + " ");
+				}
+				System.out.print("\n");
+			}
+			
+		}
+		
+		//Set the values of a given region (1->Size) to be shuffled later.
+		private void setRegion(int r) {
+			int[] reg = this.getRegion(r);
+			for (int x = 0; x < this.iSize; x++) {
+				reg[x] = x + 1;
+			}
+		}
+		
+		//Shuffles a one-dimensional array in a random order.
+		private void shuffleArray(int[] ar) {
+			int[] ar2 = ar.clone();
+			
+			List<int[]> array = Arrays.asList(ar2);
+			
+			Collections.shuffle(array);
+			
+			for (int x = 0; x < this.iSize; x++) {
+				ar[0] = ar2[0];
+			};
+		}
+		
+		//Shuffles a given region using shuffleArray.
+		private void shuffleRegion(int r) {
+			shuffleArray(getRegion(r));	
+		}
+		
+		//Fills the diagonal regions of a puzzle with values, then shuffles the region.
+		private void fillDiagonalRegions() {
+			for (int x = 0; x < this.iSize - 1; x += (this.iSqrtSize + 1)) {
+				setRegion(x);
+				shuffleRegion(x);
+			}
+			
+		}
+	
+		//Returns the number of a region (0->Size-1) based off of the location of a point in the region.
+		public int getRegionNbr(int iCol, int iRow) {
+
+			int i = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
+	
+			return i;
+		}
 }
