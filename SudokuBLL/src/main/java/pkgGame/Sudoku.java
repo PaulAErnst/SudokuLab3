@@ -1,6 +1,7 @@
 package pkgGame;
 
 
+import java.util.ArrayList;
 //Below is used for Lab 3--------
 import java.util.Arrays;
 import java.util.Collections;
@@ -289,7 +290,6 @@ public class Sudoku extends LatinSquare {
 				}
 				System.out.print("\n");
 			}
-			
 		}
 		
 		//Set the values of a given region (1->Size) to be shuffled later.
@@ -298,40 +298,68 @@ public class Sudoku extends LatinSquare {
 			for (int x = 0; x < this.iSize; x++) {
 				reg[x] = x + 1;
 			}
+			//Changes the actual puzzle to adjust to the shuffled region.
+			int[][] sodPuz = this.getPuzzle();
+			int i = (r / iSqrtSize) * iSqrtSize;
+			int j = (r % iSqrtSize) * iSqrtSize;		
+			int jMax = j + iSqrtSize;
+			int iMax = i + iSqrtSize;
+			int iCnt = 0;
+
+			for (; i < iMax; i++) {
+				for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+					sodPuz[i][j] = reg[iCnt++];
+				}
+			}
+			super.setLatinSquare(sodPuz);
 		}
 		
 		//Shuffles a one-dimensional array in a random order.
 		private void shuffleArray(int[] ar) {
-			int[] ar2 = ar.clone();
-			
-			List<int[]> array = Arrays.asList(ar2);
-			
-			Collections.shuffle(array);
-			
-			for (int x = 0; x < this.iSize; x++) {
-				ar[0] = ar2[0];
-			};
+
+			List<Integer> shuffleArr = new ArrayList<Integer>();
+			for (int i = 0; i < ar.length; i++) {
+				shuffleArr.add(ar[i]);
+			}
+			Collections.shuffle(shuffleArr);
+			for (int i = 0; i < ar.length; i++) {
+				ar[i] = shuffleArr.get(i);
+			}	
 		}
 		
 		//Shuffles a given region using shuffleArray.
 		private void shuffleRegion(int r) {
-			shuffleArray(getRegion(r));	
-		}
-		
+			setRegion(r);
+			int[] regArray = getRegion(r);
+			this.shuffleArray(regArray);
+			//Changes the actual puzzle to adjust to the shuffled region.
+			int[][] sodPuz = this.getPuzzle();
+			int i = (r / iSqrtSize) * iSqrtSize;
+			int j = (r % iSqrtSize) * iSqrtSize;		
+			int jMax = j + iSqrtSize;
+			int iMax = i + iSqrtSize;
+			int iCnt = 0;
+
+			for (; i < iMax; i++) {
+				for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+					sodPuz[i][j] = regArray[iCnt++];
+				}
+			}
+			super.setLatinSquare(sodPuz);
+
+			};
+
 		//Fills the diagonal regions of a puzzle with values, then shuffles the region.
 		private void fillDiagonalRegions() {
-			for (int x = 0; x < this.iSize - 1; x += (this.iSqrtSize + 1)) {
+			for (int x = 0; x < this.iSize; x += (this.iSqrtSize + 1)) {
 				setRegion(x);
 				shuffleRegion(x);
-			}
-			
+			}	
 		}
 	
 		//Returns the number of a region (0->Size-1) based off of the location of a point in the region.
 		public int getRegionNbr(int iCol, int iRow) {
-
 			int i = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
-	
 			return i;
 		}
 }
